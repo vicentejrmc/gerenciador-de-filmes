@@ -1,1 +1,176 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'bootstrap';
+@use 'bootstrap-icons';
+
+
+$primary-color: #177E89;
+$secondary-color: #084C61;
+$accent-color: #DB3A34;
+$background-color: #323031;
+$text-color: #081c22;
+$neutral-color: #eef1f1;
+
+
+.container {
+  max-width: 1200px !important;
+}
+
+.btn-group.rounded-pill {
+  border: 1px solid $primary-color;
+}
+
+.btn-group.rounded-pill .btn {
+  border-radius: 50rem !important;
+  transition: all 0.2s ease;
+
+  width: 100px;
+  height: 25px;
+  color: $primary-color;
+  font-size: 13px;
+}
+
+.btn-group.rounded-pill .btn-check:checked + .btn {
+  background-color: $primary-color;
+  color: $neutral-color;
+  font-weight: 600;
+}
+
+.app-scrollbar-customizado {
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $secondary-color;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $neutral-color;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $neutral-color;
+    }
+  }
+}
+
+.app-background-gradiente {
+  background-image: linear-gradient(to right,
+    rgb(157, 211, 255),
+    rgba(133, 160, 248, 0.84)
+  );
+}
+
+.app-fundo-navbar {
+  background-color: $primary-color;
+  box-shadow: $background-color(10, 10, 10, 10);
+}
+
+.app-botao-navbar {
+  min-width: 130px;
+  text-align: center;
+  font-size: 17px;
+
+  &::after {
+    content: '';
+    width: 0px;
+    height: 1px;
+
+    display: block;
+    background: $neutral-color;
+    transition: 300ms ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+.app-barra-busca {
+  background-color: $neutral-color;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.app-banner-principal {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(to right, rgba(71, 122, 180, 0.774), rgba(17, 67, 143, 0.918)),
+    url('/banner-principal.webp');
+}
+
+
+.app-container-principal {
+  min-height: 360px;
+  padding-top: 6rem;
+}
+
+.app-porcentagem-nota {
+  background-color: #081c22;
+  color: $neutral-color;
+
+  .app-valor-porcentagem {
+    &::after {
+      content: '%';
+      font-size: 9px;
+    }
+  }
+}
+
+.app-icone-absoluto {
+  position: absolute;
+  bottom: -10px;
+  right: 5px;
+}
+
+.app-borda-nota-mais-baixa {
+  border: 2px solid transparent;
+  border-top-color: $accent-color;
+}
+
+.app-borda-nota-baixa {
+  border: 2px solid transparent;
+  border-top-color: $accent-color;
+  border-right-color: $accent-color;
+}
+
+.app-borda-nota-media {
+  border: 2px solid transparent;
+  border-top-color: $background-color;
+  border-right-color: $background-color;
+  border-bottom-color: $background-color;
+}
+
+.app-borda-nota-alta {
+  border: 2px solid $accent-color;
+}
+
+.app-botao-gradiente {
+  border: none;
+  background: linear-gradient(to right, rgb(30, 94, 213) 0%, rgb(130, 190, 247));
+  color: $neutral-color;
+}
+
+.app-titulo-card {
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.app-banner-fundo {
+  background-color: $background-color;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.app-overlay-banner {
+  background-image: linear-gradient(to right,
+    rgb(115, 117, 245) ,
+    rgba(48, 47, 126, 0.84),
+    rgba(30, 15, 161, 0.84)
+  );
+}
