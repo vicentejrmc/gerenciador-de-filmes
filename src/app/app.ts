@@ -1,21 +1,19 @@
-import { Component, inject, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject} from '@angular/core';
 import { Navbar } from "./components/navbar/navbar";
 import { BannerPrincipal } from './components/banner-principal/banner-principal';
 import { MidiaService } from './services/midia-service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, BannerPrincipal],
+  imports: [AsyncPipe, Navbar, BannerPrincipal],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App implements OnInit {
+export class App {
   protected readonly midiaService = inject(MidiaService);
 
-    ngOnInit(): void {
-    this.midiaService.selecionarMidiasPopulares()
-    .subscribe((v) => console.log(v));
-  }
+  protected  readonly midiasPopulares$ = this.midiaService
+  .selecionarMidiasPopulares();
 }
 

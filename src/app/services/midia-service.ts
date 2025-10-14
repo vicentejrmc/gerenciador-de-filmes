@@ -14,15 +14,10 @@ export class MidiaService {
   public selecionarMidiasPopulares() {
     const urlCompleto = `${this.urlBase}/movie/popular?language=pt-BR`;
 
-    return this.http
-      .get<MidiaApiResponse>(urlCompleto, {
-        headers: {
-          Authorization: environment.apiKey,
-        },
-      })
-      .pipe(
-        map((x) => {
-          return {
+    return this.http.get<MidiaApiResponse>(urlCompleto, {
+        headers: {Authorization: environment.apiKey,},
+    }).pipe(map((x) => {
+      return {
             ...x,
             results: x.results.map((y) => ({
               ...y,

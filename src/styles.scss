@@ -36,20 +36,20 @@ $neutral-color: #eef1f1;
 
 .app-scrollbar-customizado {
   &::-webkit-scrollbar {
-    height: 8px;
+    height: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: $secondary-color;
-    border-radius: 5px;
+    border-radius: 10px;
   }
 
   &::-webkit-scrollbar-track {
     background-color: $neutral-color;
-    border-radius: 5px;
+    border-radius: 10px;
 
     &:hover {
-      background-color: $neutral-color;
+      background-color: rgb(210, 223, 247);
     }
   }
 }
