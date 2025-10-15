@@ -1,4 +1,4 @@
-import { Component, inject} from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { Navbar } from "./components/navbar/navbar";
 import { BannerPrincipal } from './components/banner-principal/banner-principal';
 import { MidiaService } from './services/midia-service';
@@ -12,7 +12,8 @@ import { TipoMidia } from './models/tipo-midia';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App{
+
   protected readonly midiaService = inject(MidiaService);
   protected readonly tipoMidia = TipoMidia;
   protected readonly midiasPopularesSubject$ = new BehaviorSubject<TipoMidia>(TipoMidia.Filme);
@@ -28,5 +29,7 @@ export class App {
     switchMap((tipo) => this.midiaService.selecionarMidiasMaisVotadas(tipo)),
     tap((v)=> console.log(v))
   );
+
+  protected  readonly filmesEmCartaz$ = this.midiaService.selecionarFilmesEmCartaz();
 }
 
