@@ -7,10 +7,10 @@
       <h2 class="fs-4 mb-0">Populares</h2>
 
     <div class="btn-group rounded-pill overflow-hildden" role="group">
-      <input checked="true" type="radio" class="btn-check" name="tipoMidiasPopulares" id="radioMidiasPopularesFilmes">
+      <input (change)="midiasPopularesSubject$.next(tipoMidia.Filme)"  checked="true" type="radio" class="btn-check" name="tipoMidiasPopulares" id="radioMidiasPopularesFilmes">
       <label for="radioMidiasPopularesFilmes" class="btn btn-sm btn-outline-primary border-0">Filmes</label>
 
-      <input type="radio" class="btn-check" name="tipoMidiasPopulares" id="radioMidiasPopularesTv">
+      <input (change)="midiasPopularesSubject$.next(tipoMidia.Tv)" type="radio" class="btn-check" name="tipoMidiasPopulares" id="radioMidiasPopularesTv">
       <label for="radioMidiasPopularesTv" class="btn btn-sm btn-outline-primary border-0">TV</label>
     </div>
   </div>

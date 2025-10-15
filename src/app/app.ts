@@ -3,6 +3,8 @@ import { Navbar } from "./components/navbar/navbar";
 import { BannerPrincipal } from './components/banner-principal/banner-principal';
 import { MidiaService } from './services/midia-service';
 import { AsyncPipe } from '@angular/common';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import { TipoMidia } from './models/tipo-midia';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,14 @@ import { AsyncPipe } from '@angular/common';
 export class App {
   protected readonly midiaService = inject(MidiaService);
 
-  protected  readonly midiasPopulares$ = this.midiaService
-  .selecionarMidiasPopulares();
+  protected readonly tipoMidia = TipoMidia;
+  protected readonly midiasPopularesSubject$ = new BehaviorSubject<TipoMidia>(TipoMidia.Filme);
+
+  protected  readonly midiasPopulares$ = this.midiasPopularesSubject$.pipe(
+    tap((v)=> console.log(v)),
+    switchMap((tipo) => this.midiaService.selecionarMidiasPopulares(tipo))
+  )
+
+  //protected  readonly midiasPopulares$ = this.midiaService.selecionarMidiasPopulares();
 }
 
