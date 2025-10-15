@@ -14,8 +14,26 @@ export class MidiaService {
 
   public selecionarMidiasPopulares(tipo: TipoMidia) {
     const tipoSelecionado = tipo === 'filme' ? 'movie' : 'tv';
-
     const urlCompleto = `${this.urlBase}/${tipoSelecionado}/popular?language=pt-BR`;
+
+    return this.http.get<MidiaApiResponse>(urlCompleto, {
+        headers: {Authorization: environment.apiKey,},
+    }).pipe(map((x) => {
+      return {
+            ...x,
+            results: x.results.map((y) => ({
+              ...y,
+              poster_path: 'https://image.tmdb.org/t/p/w500' + y.poster_path,
+              backdrop_path: 'https://image.tmdb.org/t/p/original' + y.backdrop_path,
+            })),
+          };
+        })
+      );
+  }
+
+   public selecionarMidiasMaisVotadas(tipo: TipoMidia) {
+    const tipoSelecionado = tipo === 'filme' ? 'movie' : 'tv';
+    const urlCompleto = `${this.urlBase}/${tipoSelecionado}/top_rated?language=pt-BR`;
 
     return this.http.get<MidiaApiResponse>(urlCompleto, {
         headers: {Authorization: environment.apiKey,},

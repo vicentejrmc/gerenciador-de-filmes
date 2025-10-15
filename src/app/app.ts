@@ -14,15 +14,19 @@ import { TipoMidia } from './models/tipo-midia';
 })
 export class App {
   protected readonly midiaService = inject(MidiaService);
-
   protected readonly tipoMidia = TipoMidia;
   protected readonly midiasPopularesSubject$ = new BehaviorSubject<TipoMidia>(TipoMidia.Filme);
 
   protected  readonly midiasPopulares$ = this.midiasPopularesSubject$.pipe(
-    tap((v)=> console.log(v)),
-    switchMap((tipo) => this.midiaService.selecionarMidiasPopulares(tipo))
-  )
+    switchMap((tipo) => this.midiaService.selecionarMidiasPopulares(tipo)),
+    tap((v)=> console.log(v))
+  );
 
-  //protected  readonly midiasPopulares$ = this.midiaService.selecionarMidiasPopulares();
+  protected readonly midiasMaisVotadasSubject$ = new BehaviorSubject<TipoMidia>(TipoMidia.Filme);
+
+  protected  readonly midiasMaisVotadas$ = this.midiasMaisVotadasSubject$.pipe(
+    switchMap((tipo) => this.midiaService.selecionarMidiasMaisVotadas(tipo)),
+    tap((v)=> console.log(v))
+  );
 }
 
