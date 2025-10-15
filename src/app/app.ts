@@ -1,14 +1,15 @@
-import { Component, inject, OnInit} from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { Navbar } from "./components/navbar/navbar";
 import { BannerPrincipal } from './components/banner-principal/banner-principal';
 import { MidiaService } from './services/midia-service';
 import { AsyncPipe } from '@angular/common';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { TipoMidia } from './models/tipo-midia';
+import { CarrosselMidias } from "./components/shared/carrossel-midias/carrossel-midias";
 
 @Component({
   selector: 'app-root',
-  imports: [AsyncPipe, Navbar, BannerPrincipal],
+  imports: [AsyncPipe, Navbar, BannerPrincipal, CarrosselMidias],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
