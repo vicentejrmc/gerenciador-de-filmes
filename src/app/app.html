@@ -3,7 +3,18 @@
 <app-banner-principal></app-banner-principal>
 
 <div class="container py-4">
-  <h2 class="fs-4 mb-0">Populares</h2>
+  <div class="d-flex aling-itens-center gap-3">
+      <h2 class="fs-4 mb-0">Populares</h2>
+
+    <div class="btn-group rounded-pill overflow-hildden" role="group">
+      <input checked="true" type="radio" class="btn-check" name="tipoMidiasPopulares" id="radioMidiasPopularesFilmes">
+      <label for="radioMidiasPopularesFilmes" class="btn btn-sm btn-outline-primary border-0">Filmes</label>
+
+      <input type="radio" class="btn-check" name="tipoMidiasPopulares" id="radioMidiasPopularesTv">
+      <label for="radioMidiasPopularesTv" class="btn btn-sm btn-outline-primary border-0">TV</label>
+    </div>
+  </div>
+
   <div class="row flex-nowrap overflow-x-scroll g-3 my-3 app-scrollbar-customizado">
   @for(midia of (midiasPopulares$ | async)?.results; track midia.id){
     <div class="col-5 col-md-2">
@@ -14,6 +25,7 @@
         [alt]="midia.title ?? midia.name"
         />
       </div>
+
       <div class="mt-2">
         <small class="text-muted">{{
           midia.release_date ?? midia.first_air_date
