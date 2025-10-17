@@ -2,7 +2,7 @@
 
 @if (filmesEmCartaz$ | async; as filmesEmCartaz){
   <h2 class="container fs-4 mb-0">Filmes em Cartaz</h2>
-  <app-carrossel-midias [midias]="(filmesEmCartaz.results)"></app-carrossel-midias>
+  <app-carrossel-midias [tipoMidia]="" [midias]="(filmesEmCartaz.results)"></app-carrossel-midias>
 }
 
 <hr class="d-flex mt-5 border-4">
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <app-carrossel-midias [midias]="midiasPopulares.results"></app-carrossel-midias>
+  <app-carrossel-midias tipoMidia="" [midias]="midiasPopulares.results"></app-carrossel-midias>
 
   }
 
