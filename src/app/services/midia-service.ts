@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map, Observable } from 'rxjs';
 import { TipoMidia } from '../models/tipo-midia';
+import { DetalhesMidiaModel } from '../models/detalhes-midia';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,25 @@ export class MidiaService {
     return this.buscarMidias(url, TipoMidia.Filme);
   }
 
-  //Método para buscar midias na api.
+  public buscarDetalhesMidia(tipo: TipoMidia, idMidia: number): Observable<DetalhesMidiaModel> {
+    const tipoSelecionado = tipo === 'filme' ? 'movie' : 'tv';
+    const url = `${this.urlBase}/${tipoSelecionado}/${idMidia}?language=pt-BR`;
+
+    return this.http.get<DetalhesMidiaModel>(url, {
+      headers: { Authorization: environment.apiKey },
+    }).pipe(
+      map((x) => ({
+        ...x,
+        type: tipo,
+        vote_average: x.vote_average * 10,
+        poster_path: x.poster_path ? 'https://image.tmdb.org/t/p/w500' + x.poster_path : '',
+        backdrop_path: x.backdrop_path ? 'https://image.tmdb.org/t/p/original' + x.backdrop_path : '',
+      }))
+    );
+  }
+
+
+  // --- Métodos auxiliares ---
   private buscarMidias(url: string, tipoMidia: TipoMidia): Observable<MidiaApiResponse> {
     return this.http.get<MidiaApiResponse>(url, {
       headers: { Authorization: environment.apiKey },
@@ -46,10 +65,10 @@ export class MidiaService {
     );
   }
 
-  //converter tipo.
-  private converterTipoParaApi(tipo: TipoMidia): 'movie' | 'tv' {
+  public converterTipoParaApi(tipo: TipoMidia): 'movie' | 'tv' {
     return tipo === TipoMidia.Filme ? 'movie' : 'tv';
   }
+
 }
 
 
