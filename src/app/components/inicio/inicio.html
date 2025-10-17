@@ -1,8 +1,8 @@
 <app-banner-principal></app-banner-principal>
 
 @if (filmesEmCartaz$ | async; as filmesEmCartaz){
-  <h2 class="container fs-4 mb-0">Filmes em Cartaz</h2>
-  <app-carrossel-midias [tipoMidia]="" [midias]="(filmesEmCartaz.results)"></app-carrossel-midias>
+  <h2 class="container fs-4 mb-0 text-light">Filmes em Cartaz</h2>
+  <app-carrossel-midias [tipoMidia]="filmesEmCartaz.type" [midias]="(filmesEmCartaz.results)"></app-carrossel-midias>
 }
 
 <hr class="d-flex mt-5 border-4">
@@ -11,7 +11,7 @@
   @if(midiasPopulares$ | async; as midiasPopulares)
   {
     <div class="d-flex aling-itens-center gap-3">
-    <h2 class="fs-4 mb-0">Populares</h2>
+    <h2 class="fs-4 mb-0 text-light">Populares</h2>
 
     <div class="btn-group rounded-pill overflow-hildden" role="group">
       <input (change)="midiasPopularesSubject$.next(tipoMidia.Filme)"  checked="true" type="radio" class="btn-check" name="tipoMidiasPopulares" id="radioMidiasPopularesFilmes">
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <app-carrossel-midias tipoMidia="" [midias]="midiasPopulares.results"></app-carrossel-midias>
+  <app-carrossel-midias [tipoMidia]="midiasPopulares.type" [midias]="midiasPopulares.results"></app-carrossel-midias>
 
   }
 
@@ -31,7 +31,7 @@
   @if (midiasMaisVotadas$ | async; as midiasMaisVotadas)
   {
     <div class="d-flex aling-itens-center gap-3 mt-5">
-        <h2 class="fs-4 mb-0">Mais Votados</h2>
+        <h2 class="fs-4 mb-0 text-light">Mais Votados</h2>
 
       <div class="btn-group rounded-pill overflow-hildden" role="group">
         <input (change)="midiasMaisVotadasSubject$.next(tipoMidia.Filme)"  checked="true" type="radio" class="btn-check" name="tipoMidiasMaisVotadas" id="radioMidiasMaisVotadasFilmes">
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <app-carrossel-midias [midias]="midiasMaisVotadas.results"></app-carrossel-midias>
+    <app-carrossel-midias [tipoMidia]="midiasMaisVotadas.type" [midias]="midiasMaisVotadas.results"></app-carrossel-midias>
 }
 <!-- End -->
 </div>

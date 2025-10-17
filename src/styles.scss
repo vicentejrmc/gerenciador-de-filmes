@@ -2,8 +2,8 @@
 @use 'bootstrap-icons';
 
 
-$primary-color: #177E89;
-$secondary-color: #084C61;
+$primary-color: #1fade6;
+$secondary-color: #1faee6b0;
 $accent-color: #DB3A34;
 $background-color: #323031;
 $text-color: #081c22;
@@ -56,8 +56,8 @@ $neutral-color: #eef1f1;
 
 .app-background-gradiente {
   background-image: linear-gradient(to right,
-    rgb(157, 211, 255),
-    rgba(133, 160, 248, 0.84)
+    rgb(75, 118, 155),
+    rgba(45, 62, 117, 0.877)
   );
 }
 
@@ -80,11 +80,20 @@ $neutral-color: #eef1f1;
     background: $neutral-color;
     transition: 300ms ease-in-out;
   }
-
   &:hover::after {
     width: 100%;
   }
 }
+
+// .app-card-img-hover{
+//   transition: border 0.3 ease, transform 0.3s ease;
+//   border: 2px solid transparent;
+//   border-radius: 4px;
+// }
+// .app-card-img-hover:hover{
+//   border: 4px solid $text-color;
+//   transform: scale(1,);
+// }
 
 .app-barra-busca {
   background-color: $neutral-color;
