@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { filter, map, switchMap,} from 'rxjs';
+import { filter, map, Observable, shareReplay, switchMap,} from 'rxjs';
 import { MidiaService } from '../../services/midia-service';
 import { TipoMidia } from '../../models/tipo-midia';
 import { AsyncPipe } from '@angular/common';
@@ -21,7 +21,9 @@ export class DetalhesMidia {
     })),
     filter(({ TipoMidia, idMidia }) => !!TipoMidia && !isNaN(idMidia)),
       switchMap(({ TipoMidia, idMidia }) =>
-        this.midiaService.buscarDetalhesMidia(TipoMidia!, idMidia))
+        this.midiaService.buscarDetalhesMidia(TipoMidia!, idMidia)),
+      shareReplay({bufferSize: 1, refCount: true})
+// shareReplay impede que seja duplicada(indica que a fonte(cache) do Observable seja compartilhada)
   );
 
   protected readonly videos$ = this.detalhes$.pipe(
