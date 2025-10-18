@@ -8,6 +8,7 @@ export const routes: Routes = [
     path: 'inicio', loadComponent:
      () => import('./components/inicio/inicio').then(c => c.Inicio)
   },
+
   {
     path: ':tipoMidia/:idMidia/detalhes', loadComponent:
      () => import('./components/detalhes-midia/detalhes-midia').then(d => d.DetalhesMidia)

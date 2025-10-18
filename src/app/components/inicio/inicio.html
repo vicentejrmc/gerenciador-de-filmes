@@ -5,9 +5,9 @@
   <app-carrossel-midias [tipoMidia]="filmesEmCartaz.type" [midias]="(filmesEmCartaz.results)"></app-carrossel-midias>
 }
 
-<hr class="d-flex mt-5 border-4">
 
 <div class="container py-4">
+  <hr class="border">
   @if(midiasPopulares$ | async; as midiasPopulares)
   {
     <div class="d-flex aling-itens-center gap-3">
@@ -26,7 +26,7 @@
 
   }
 
-  <hr class="d-flex mt-5 border-4">
+  <hr class="border">
 
   @if (midiasMaisVotadas$ | async; as midiasMaisVotadas)
   {

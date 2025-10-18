@@ -1,5 +1,4 @@
 import { TipoMidia } from "./tipo-midia";
-
 export interface DetalhesMidiaModel {
   id: number;
   type: TipoMidia;
