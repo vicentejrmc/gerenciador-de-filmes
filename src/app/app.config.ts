@@ -6,13 +6,19 @@ export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {
     path: 'inicio', loadComponent:
-     () => import('./components/inicio/inicio').then(c => c.Inicio)
+     () => import('./components/inicio/inicio').then((c) => c.Inicio)
   },
 
   {
     path: ':tipoMidia/:idMidia/detalhes', loadComponent:
-     () => import('./components/detalhes-midia/detalhes-midia').then(d => d.DetalhesMidia)
+     () => import('./components/detalhes-midia/detalhes-midia').then((d) => d.DetalhesMidia)
   },
+
+  {
+    path: ':tipoMidia/:tipoColecaoMidia', loadComponent:
+    () => import('./components/listagem-midia/listagem-midia').then((l) => l.ListagemMidia)
+  },
+
 ];
 
 export const appConfig: ApplicationConfig = {

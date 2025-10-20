@@ -132,6 +132,27 @@ $neutral-color: #eef1f1;
   }
 }
 
+.app-modo-grid {
+  overflow-x: unset !important;
+  display: block !important;
+  white-space: normal !important;
+}
+
+.app-modo-grid .slick-track,
+.app-modo-grid .swiper-wrapper {
+  transform: none !important;
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.app-modo-grid .slick-slide,
+.app-modo-grid .swiper-slide {
+  width: auto !important;
+  flex: 0 0 calc(16.666% - 1rem); // 6 colunas
+}
+
+
 .app-icone-absoluto {
   position: absolute;
   bottom: -10px;

@@ -64,7 +64,6 @@ export class MidiaService {
     .pipe(map(res => this.buscarCreditosMidia(res)));
 }
 
-
   // --- Métodos auxiliares ---
   private buscarMidias(url: string, tipoMidia: TipoMidia): Observable<MidiaApiResponse> {
     return this.http.get<MidiaApiResponse>(url, this.getAuthHeaders()).pipe(
