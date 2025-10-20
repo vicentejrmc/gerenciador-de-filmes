@@ -8,6 +8,11 @@ $accent-color: #DB3A34;
 $background-color: #323031;
 $text-color: #081c22;
 $neutral-color: #eef1f1;
+$avalica-mais-baixa: red;
+$avalica-baixa: rgb(255, 145, 0);
+$avalica-media: rgb(229, 255, 0);
+$avalica-alta: rgb(47, 170, 10);
+
 
 
 .container {
@@ -132,53 +137,32 @@ $neutral-color: #eef1f1;
   }
 }
 
-.app-modo-grid {
-  overflow-x: unset !important;
-  display: block !important;
-  white-space: normal !important;
-}
-
-.app-modo-grid .slick-track,
-.app-modo-grid .swiper-wrapper {
-  transform: none !important;
-  display: flex !important;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.app-modo-grid .slick-slide,
-.app-modo-grid .swiper-slide {
-  width: auto !important;
-  flex: 0 0 calc(16.666% - 1rem); // 6 colunas
-}
-
-
 .app-icone-absoluto {
   position: absolute;
-  bottom: -10px;
-  right: 5px;
+  top: -16px;
+  right: -8px;
 }
 
 .app-borda-nota-mais-baixa {
   border: 2px solid transparent;
-  border-top-color: $accent-color;
+  border-top-color: $avalica-mais-baixa;
 }
 
 .app-borda-nota-baixa {
   border: 2px solid transparent;
-  border-top-color: $accent-color;
-  border-right-color: $accent-color;
+  border-top-color: $avalica-baixa;
+  border-right-color: $avalica-baixa;
 }
 
 .app-borda-nota-media {
   border: 2px solid transparent;
-  border-top-color: $background-color;
-  border-right-color: $background-color;
-  border-bottom-color: $background-color;
+  border-top-color: $avalica-media;
+  border-right-color: $avalica-media;
+  border-bottom-color: $avalica-media;
 }
 
 .app-borda-nota-alta {
-  border: 2px solid $accent-color;
+  border: 2px solid $avalica-alta;
 }
 
 .app-botao-gradiente {

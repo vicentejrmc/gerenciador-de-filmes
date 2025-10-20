@@ -1,9 +1,11 @@
 <app-banner-principal></app-banner-principal>
 
-@if (filmesEmCartaz$ | async; as filmesEmCartaz){
-  <h2 class="container fs-4 mb-0 text-light">Filmes em Cartaz</h2>
+<div class="container">
+  @if (filmesEmCartaz$ | async; as filmesEmCartaz){
+  <h2 class="fs-4 mb-0 text-light">Filmes em Cartaz</h2>
   <app-carrossel-midias [tipoMidia]="filmesEmCartaz.type" [midias]="(filmesEmCartaz.results)"></app-carrossel-midias>
 }
+</div>
 
 
 <div class="container py-4">
