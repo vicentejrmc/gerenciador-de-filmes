@@ -1,11 +1,11 @@
 import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-const LIMITES_AVALIACAO = {
-  MUITO_BAIXA: 40,
-  BAIXA: 60,
-  MEDIA: 75,
-  ALTA: 100
+const limite_avaliacao = {
+  muito_baixa: 40,
+  baixa: 60,
+  media: 75,
+  alta: 100
 } as const;
 
 @Component({
@@ -33,13 +33,13 @@ export class IconeAvaliacao {
   }
 
   public mapearCorDaNota(avaliacao: number): string {
-    if (avaliacao <= LIMITES_AVALIACAO.MUITO_BAIXA)
+    if (avaliacao <= limite_avaliacao.muito_baixa)
       return 'app-borda-nota-mais-baixa';
 
-    if (avaliacao <= LIMITES_AVALIACAO.BAIXA)
+    if (avaliacao <= limite_avaliacao.baixa)
       return 'app-borda-nota-baixa';
 
-    if (avaliacao <= LIMITES_AVALIACAO.MEDIA)
+    if (avaliacao <= limite_avaliacao.media)
       return 'app-borda-nota-media';
 
     return 'app-borda-nota-alta';
