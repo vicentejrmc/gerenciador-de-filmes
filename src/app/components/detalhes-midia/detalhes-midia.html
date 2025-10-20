@@ -2,6 +2,7 @@
   <div class="app-banner-fundo" [style.background-image]="'url(' + detalhes.backdrop_path + ')'">
     <div class="app-overlay-banner">
       <main class="container py-3 d-flex flex-column">
+
         <!-- --- sessão principal dos detalhes --- -->
         <section aria-label="Detalhes do Filme" class="row justify-content-center g-5 text-light">
         <div class="col-lg-3">
@@ -23,6 +24,7 @@
                   }
                 </span>
               </div>
+
             </div>
           </header>
 
@@ -34,9 +36,43 @@
             } @else {
             <p class="fs-5">Sinopse não disponível...</p>
             }
+
+             @if (detalhes.vote_average > 0) {
+              <div class="d-flex align-items-center gap-2">
+                <app-icone-avaliacao
+                  [avaliacao]="detalhes.vote_average"
+                  [tamanhoPx]="60"
+                ></app-icone-avaliacao>
+                <span class="fw-semibold fs-5">Avaliação dos Usuários</span>
+              </div>
+            }
+
           </article>
         </div>
+
       </section>
+
+      <hr class="border">
+
+      <!-- sessão de creditos -->
+      @if(creditos$ | async; as creditos){
+        <section class="mt-lg-3 text-light">
+          <h2>Elenco principal</h2>
+          <div class="row flex-nowrap overflow-x-scroll g-2 pb-3 mt-2 app-scrollbar-customizado">
+    @for (membroElenco of creditos.cast; track membroElenco.id) {
+        <div class="col-4 col-lg-2">
+          <div class="card rounded-3 h-100">
+            <img class="card-img-top" [src]="membroElenco.profile_path" [alt]="membroElenco.name"/>
+              <div class="card-body px-1">
+                <p class="card-title fw-semibold mb-0">{{ membroElenco.name }}</p>
+                <small class="text-secondary text-wrap">{{ membroElenco.character }}</small>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      </section>
+    }
 
       <hr class="border">
 
@@ -44,7 +80,7 @@
       <section class="mt-lg-3 text-light">
         <h3 class="fs-2">Trailer</h3>
         @if ((videos$ | async)?.results; as videos) {
-        <div class="ratio ratio-16x9 mt-4">
+        <div class="video-wrapper mt-4">
           <iframe
           class="rounded-4" [src]="videos.at(0)!.key" frameborder="0"></iframe>
         </div>
@@ -52,6 +88,22 @@
         <span>Nenhum trailer disponível para visualização...</span>
         }
       </section>
+
+      <hr class="border">
+
+      <!-- sessão produção -->
+      @if (creditos$ | async; as creditos) {
+        <section class="container py-4 text-light">
+          <h4>Produção</h4>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            @for (membroProducao of creditos.crew; track membroProducao.id) {
+              <span>
+                {{ membroProducao.name }} – {{ membroProducao.job }} |
+              </span>
+            }
+          </div>
+        </section>
+      }
 
       </main>
     </div>

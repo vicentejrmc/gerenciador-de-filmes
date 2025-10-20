@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { filter, map, Observable, shareReplay, switchMap,} from 'rxjs';
+import { filter, map, shareReplay, switchMap,} from 'rxjs';
 import { MidiaService } from '../../services/midia-service';
 import { TipoMidia } from '../../models/tipo-midia';
 import { AsyncPipe } from '@angular/common';
+import { IconeAvaliacao } from "../shared/icone-avaliacao/icone-avaliacao";
 
 @Component({
   selector: 'app-detalhes-midia',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, IconeAvaliacao],
   templateUrl: './detalhes-midia.html'
 })
 export class DetalhesMidia {
@@ -28,5 +29,11 @@ export class DetalhesMidia {
 
   protected readonly videos$ = this.detalhes$.pipe(
     switchMap(detalhes => this.midiaService.buscarVideoPorId(detalhes.type, detalhes.id))
+  );
+
+  protected readonly creditos$ = this.detalhes$.pipe(
+    switchMap((detalhes) =>
+      this.midiaService.selecionarCreditosPorId(detalhes.type, detalhes.id)
+    )
   );
 }
