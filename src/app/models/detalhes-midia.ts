@@ -1,7 +1,7 @@
 import { TipoMidia } from "./tipo-midia";
 export interface DetalhesMidiaModel {
   id: number;
-  type: TipoMidia;
+  media_type: TipoMidia;
   adult: boolean;
   backdrop_path: string;
   genres: {id: number; name: string;}[];

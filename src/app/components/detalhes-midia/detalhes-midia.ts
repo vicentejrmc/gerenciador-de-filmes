@@ -28,12 +28,12 @@ export class DetalhesMidia {
   );
 
   protected readonly videos$ = this.detalhes$.pipe(
-    switchMap(detalhes => this.midiaService.buscarVideoPorId(detalhes.type, detalhes.id))
+    switchMap(detalhes => this.midiaService.buscarVideoPorId(detalhes.media_type, detalhes.id))
   );
 
   protected readonly creditos$ = this.detalhes$.pipe(
     switchMap((detalhes) =>
-      this.midiaService.selecionarCreditosPorId(detalhes.type, detalhes.id)
+      this.midiaService.selecionarCreditosPorId(detalhes.media_type, detalhes.id)
     )
   );
 }

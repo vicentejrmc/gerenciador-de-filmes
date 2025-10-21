@@ -104,7 +104,8 @@ $avalica-alta: rgb(47, 170, 10);
 
 .app-barra-busca {
   background-color: $neutral-color;
-  border: none;
+  border: 1px solid $primary-color;
+  border-radius: 8px;
 
   &:focus {
     outline: none;
@@ -118,8 +119,6 @@ $avalica-alta: rgb(47, 170, 10);
     linear-gradient(to right, rgba(71, 122, 180, 0.774), rgba(17, 67, 143, 0.918)),
     url('/banner-principal.webp');
 }
-
-
 .app-container-principal {
   min-height: 360px;
   padding-top: 6rem;

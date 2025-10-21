@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { MidiaApiResponse } from '../models/midia-api-response';
+import { MidiaApiResponse, MidiaResultadoBusca } from '../models/midia-api-response';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map, Observable } from 'rxjs';
@@ -42,7 +42,7 @@ export class MidiaService {
     return this.http.get<DetalhesMidiaModel>(url, this.getAuthHeaders()).pipe(
       map((x) => ({
         ...x,
-        type: tipo,
+        media_type: tipo,
         vote_average: x.vote_average * 10,
         poster_path: x.poster_path ? 'https://image.tmdb.org/t/p/w500' + x.poster_path : '',
         backdrop_path: x.backdrop_path ? 'https://image.tmdb.org/t/p/original' + x.backdrop_path : '',
@@ -64,12 +64,32 @@ export class MidiaService {
     .pipe(map(res => this.buscarCreditosMidia(res)));
 }
 
+  public pesquisarMidia(query: string): Observable<MidiaApiResponse>{
+    const url = `https://api.themoviedb.org/3/search/multi?query=${query}&language=pt-BR`;
+
+    return this.http.get<MidiaApiResponse>(url, this.getAuthHeaders())
+    .pipe(map((res) => this.resultPesquisarMidias(res)));
+  }
+
+
   // --- Métodos auxiliares ---
+  private resultPesquisarMidias(x: MidiaApiResponse): MidiaApiResponse {
+    return {
+      ...x,
+      results: x.results.map((y) => ({
+        ...y,
+        media_type: (y as MidiaResultadoBusca).media_type.toString() === 'movie' ? 'filme' : 'tv',
+        poster_path: 'https://image.tmdb.org/t/p/w500' + y.poster_path,
+        backdrop_path: 'https://image.tmdb.org/t/p/original' + y.backdrop_path,
+      })),
+    };
+  }
+
   private buscarMidias(url: string, tipoMidia: TipoMidia): Observable<MidiaApiResponse> {
     return this.http.get<MidiaApiResponse>(url, this.getAuthHeaders()).pipe(
       map((x) => ({
         ...x,
-        type: tipoMidia,
+        media_type: tipoMidia,
         results: x.results.map((y) => ({
           ...y,
           poster_path: 'https://image.tmdb.org/t/p/w500' + y.poster_path,

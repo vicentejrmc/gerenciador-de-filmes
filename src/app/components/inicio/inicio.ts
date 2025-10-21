@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { BannerPrincipal } from "../banner-principal/banner-principal";
 import { TipoMidia } from '../../models/tipo-midia';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { MidiaService } from '../../services/midia-service';
 import { CarrosselMidias } from "../shared/carrossel-midias/carrossel-midias";
 import { AsyncPipe } from '@angular/common';
@@ -17,7 +17,8 @@ export class Inicio {
   protected readonly midiasPopularesSubject$ = new BehaviorSubject<TipoMidia>(TipoMidia.Filme);
 
   protected  readonly midiasPopulares$ = this.midiasPopularesSubject$.pipe(
-    switchMap((tipo) => this.midiaService.selecionarMidiasPopulares(tipo))
+    switchMap((tipo) => this.midiaService.selecionarMidiasPopulares(tipo)),
+    tap(midias => console.log(midias) )
   );
 
   protected readonly midiasMaisVotadasSubject$ = new BehaviorSubject<TipoMidia>(TipoMidia.Filme);
