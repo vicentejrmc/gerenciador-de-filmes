@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-barra-busca',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './barra-busca.html',
 })
 export class BarraBusca {

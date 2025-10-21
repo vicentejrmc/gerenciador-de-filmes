@@ -1,4 +1,5 @@
 <div class="container py-4 text-light">
+  <app-barra-busca></app-barra-busca>
   @if (cabecalhoMidiasSelecionadas$ | async; as cabecalho) {
   <h2>{{ cabecalho.tipoMidia }} {{ cabecalho.tipoColecaoMidia }}</h2>
   <hr class="border">

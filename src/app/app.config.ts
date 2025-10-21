@@ -18,7 +18,10 @@ export const routes: Routes = [
     path: ':tipoMidia/:tipoColecaoMidia', loadComponent:
     () => import('./components/listagem-midia/listagem-midia').then((l) => l.ListagemMidia)
   },
-
+  {
+    path: 'busca', loadComponent:
+    () => import('./components/busca/busca').then((b) => b.Busca)
+  }
 ];
 
 export const appConfig: ApplicationConfig = {

@@ -7,11 +7,12 @@ import { TipoColecaoMidia } from '../../models/tipo-colecao-midia';
 import { TipoMidia } from '../../models/tipo-midia';
 import { MidiaService } from '../../services/midia-service';
 import { CardMidia } from '../shared/card-midia/card-midia';
+import { BarraBusca } from "../shared/barra-busca/barra-busca";
 
 
 @Component({
   selector: 'app-listagem-midia',
-  imports: [AsyncPipe, CardMidia],
+  imports: [AsyncPipe, CardMidia, BarraBusca],
   templateUrl: './listagem-midia.html',
 })
 export class ListagemMidia {
