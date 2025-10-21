@@ -1,4 +1,4 @@
-import { filter, map, shareReplay, switchMap, tap } from 'rxjs';
+import { filter, map, shareReplay, switchMap, tap, distinctUntilChanged } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -33,6 +33,11 @@ export class ListagemMidia {
         tipoColecaoMidia: tipoColecaoMidia as TipoColecaoMidia,
       };
     }),
+    // evita re-execução quando os mesmos parâmetros são emitidos em sequência
+    distinctUntilChanged(
+      (a, b) =>
+        a.tipoMidia === b.tipoMidia && a.tipoColecaoMidia === b.tipoColecaoMidia
+    ),
     shareReplay({ bufferSize: 1, refCount: true })
   );
 
@@ -58,7 +63,9 @@ export class ListagemMidia {
     switchMap((params) => {
       if (params.tipoColecaoMidia === TipoColecaoMidia.Populares)
         return this.midiaService.selecionarMidiasPopulares(params.tipoMidia);
-      else return this.midiaService.selecionarMidiasMaisVotadas(params.tipoMidia);
-    })
+      else
+        return this.midiaService.selecionarMidiasMaisVotadas(params.tipoMidia);
+    }),
+    shareReplay({ bufferSize: 1, refCount: true })
   );
 }
