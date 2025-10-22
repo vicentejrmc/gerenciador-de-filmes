@@ -8,6 +8,13 @@ export interface MidiaApiResponse {
   total_results: number;
 }
 
+export interface ResultadoBuscaApiResponse {
+  page: number;
+  results: MidiaResultadoBusca[];
+  total_pages: number;
+  total_results: number;
+}
+
 export interface Midia {
   id: number;
   adult: boolean;

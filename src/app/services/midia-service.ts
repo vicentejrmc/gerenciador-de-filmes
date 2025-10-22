@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { MidiaApiResponse, MidiaResultadoBusca } from '../models/midia-api-response';
+import { MidiaApiResponse, ResultadoBuscaApiResponse } from '../models/midia-api-response';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map, Observable } from 'rxjs';
@@ -64,21 +64,20 @@ export class MidiaService {
     .pipe(map(res => this.buscarCreditosMidia(res)));
 }
 
-  public pesquisarMidia(query: string): Observable<MidiaApiResponse>{
+  public pesquisarMidia(query: string): Observable<ResultadoBuscaApiResponse>{
     const url = `https://api.themoviedb.org/3/search/multi?query=${query}&language=pt-BR`;
 
-    return this.http.get<MidiaApiResponse>(url, this.getAuthHeaders())
+    return this.http.get<ResultadoBuscaApiResponse>(url, this.getAuthHeaders())
     .pipe(map((res) => this.resultPesquisarMidias(res)));
   }
 
-
   // --- Métodos auxiliares ---
-  private resultPesquisarMidias(x: MidiaApiResponse): MidiaApiResponse {
+  private resultPesquisarMidias(x: ResultadoBuscaApiResponse): ResultadoBuscaApiResponse {
     return {
       ...x,
       results: x.results.map((y) => ({
         ...y,
-        media_type: (y as MidiaResultadoBusca).media_type.toString() === 'movie' ? 'filme' : 'tv',
+        media_type: (y.media_type.toString() === 'movie' ? 'filme' : 'tv') as TipoMidia,
         poster_path: 'https://image.tmdb.org/t/p/w500' + y.poster_path,
         backdrop_path: 'https://image.tmdb.org/t/p/original' + y.backdrop_path,
       })),
