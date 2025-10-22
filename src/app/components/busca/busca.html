@@ -1,8 +1,39 @@
-<div class="container mt-4">
+<div class="container mt-4 text-light">
   <app-barra-busca></app-barra-busca>
-  <h3 class="text-light m-3">Resultado(s) da busca</h3>
+  <hr class="border">
+    <h5
+    class="m-3 fw-semibold">
+    Resultados encontrados para: "{{ queryParam$ | async}}"
+    </h5>
 
-  {{ filmesEncontrados | async }}
-  {{ seriesEncontradas | async }}
+    <h3>Filmes</h3>
+    @if(filmesEncontrados |async; as filmes){
+      <div class="row g-2 mt-2">
+        @for(filme of filmes; track filme.id){
+          <div class=" col-3 col-lg-3 col-xl-2">
+            <app-card-midia
+             [tipoMidia]="filme.media_type"
+             [midia]="filme"></app-card-midia>
+          </div>
+        }
+      </div>
+    }
+
+    <hr class="border">
+
+    <h3>Series/Tv</h3>
+    @if(seriesEncontradas |async; as series){
+      <div class="row g-2 mt-2">
+        @for(serie of series; track serie.id){
+          <div class=" col-3 col-lg-3 col-xl-2">
+            <app-card-midia
+             [tipoMidia]="serie.media_type"
+             [midia]="serie"></app-card-midia>
+          </div>
+        }
+      </div>
+    }
+
+
 </div>
 

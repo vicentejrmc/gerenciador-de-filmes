@@ -64,8 +64,8 @@ export class MidiaService {
     .pipe(map(res => this.buscarCreditosMidia(res)));
 }
 
-  public pesquisarMidia(query: string): Observable<ResultadoBuscaApiResponse>{
-    const url = `https://api.themoviedb.org/3/search/multi?query=${query}&language=pt-BR`;
+  public pesquisarMidia(query: string, pagina: number = 1): Observable<ResultadoBuscaApiResponse>{
+    const url = `https://api.themoviedb.org/3/search/multi?query=${query}&page=${pagina}&language=pt-BR`;
 
     return this.http.get<ResultadoBuscaApiResponse>(url, this.getAuthHeaders())
     .pipe(map((res) => this.resultPesquisarMidias(res)));
