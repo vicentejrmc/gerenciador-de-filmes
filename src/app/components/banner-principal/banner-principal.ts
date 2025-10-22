@@ -11,7 +11,6 @@ export class BannerPrincipal {
   private readonly router = inject(Router)
 
   public buscar(query: string){
-
     this.router.navigate(['/busca'], {queryParams: { query }});
   }
 }

@@ -1,12 +1,11 @@
 <div class="container mt-4 text-light">
-  <app-barra-busca></app-barra-busca>
+  <app-barra-busca (buscar)="buscar($event)"></app-barra-busca>
   <hr class="border">
     <h5
     class="m-3 fw-semibold">
-    Resultados encontrados para: "{{ queryParam$ | async}}"
+    Filmes encontrados para: "{{ queryParam$ | async}}"
     </h5>
 
-    <h3>Filmes</h3>
     @if(filmesEncontrados |async; as filmes){
       <div class="row g-2 mt-2">
         @for(filme of filmes; track filme.id){
@@ -21,11 +20,15 @@
 
     <hr class="border">
 
-    <h3>Series/Tv</h3>
+        <h5
+    class="m-3 fw-semibold">
+    Series/Tv encontrados para: "{{ queryParam$ | async}}"
+    </h5>
+
     @if(seriesEncontradas |async; as series){
       <div class="row g-2 mt-2">
         @for(serie of series; track serie.id){
-          <div class=" col-3 col-lg-3 col-xl-2">
+          <div class=" col-4 col-lg-3 col-xl-2">
             <app-card-midia
              [tipoMidia]="serie.media_type"
              [midia]="serie"></app-card-midia>
@@ -34,6 +37,47 @@
       </div>
     }
 
+    @if(paginasDisponiveis$ | async; as paginasDisponiveis){
+      <section id="paginacao" class="row justify-content-center gap-1 mt-2 g-2 align-items-center">
+        <!-- Início -->
+        <div class="col-auto">
+          <button
+            class="btn btn-sm btn-outline-primary text-light fw-bold mb-2"
+            [disabled]="paginasDisponiveis.paginaAtual === 1"
+            (click)="goToFirst()"
+          >
+            Início
+          </button>
+        </div>
 
+        <!-- janela de páginas (até 7) -->
+        @for (pagina of paginasDisponiveis.paginas; track $index) {
+          <div class="col-auto">
+            <button
+              style="min-width: 33px;"
+              class="btn btn-sm rounded-circle text-light fw-bold mb-2"
+              [ngClass]="{
+                'btn-primary': paginasDisponiveis.paginaAtual === pagina,
+                'btn-outline-primary': paginasDisponiveis.paginaAtual !== pagina
+              }"
+              (click)="goToPage(pagina)"
+            >
+              {{pagina}}
+            </button>
+          </div>
+        }
+
+        <!-- Fim -->
+        <div class="col-auto">
+          <button
+            class="btn btn-sm btn-outline-primary text-light fw-bold mb-2"
+            [disabled]="paginasDisponiveis.paginaAtual === paginasDisponiveis.totalPaginas"
+            (click)="goToLast(paginasDisponiveis.totalPaginas)"
+          >
+            Fim
+          </button>
+        </div>
+      </section>
+    }
 </div>
 
