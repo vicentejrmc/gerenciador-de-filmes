@@ -9,6 +9,9 @@
     "test": "ng test",
     "format": "prettier --write"
   },
+   "engines": {
+      "node": ">=20.19"
+  },
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
